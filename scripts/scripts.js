@@ -11,8 +11,8 @@ function getEmail(url) {
         .then(accumulateEmails)
 }
 
-// take the emails received from the API, and do something with them
 function accumulateEmails(emailData) {
+    // take the emails received from the API, and do something with them
     console.log(emailData);
     // store each email (which is each object's key) in emails
     let coffeeData = emailData;
@@ -21,10 +21,10 @@ function accumulateEmails(emailData) {
 }
 
 
-function storeEmails(array) {
+function storeEmails(object) {
     // turn array of emails into JSON text format
-    const jsonCoffeeData = JSON.stringify(array);
-    console.log(`Saving ${array.length} emails`);
+    const jsonCoffeeData = JSON.stringify(object);
+    console.log(`Saving ${Object.keys(object).length} emails`);
     // save json formatted emails in localStorage
     localStorage.setItem('coffee-data', jsonCoffeeData);
 
@@ -107,3 +107,18 @@ function main() {
 }
 
 main();
+
+function drawSortLetters() {
+    let sortUl = document.querySelector('[data-sort-list]');
+    console.log(sortUl);
+    // initialize ascii value at 65
+    let asciiValue = 65;
+    while (asciiValue < 91) {
+        let li = document.createElement('li');
+        li.textContent = String.fromCharCode(asciiValue);
+        sortUl.append(li);
+        asciiValue++;
+    }
+
+}
+drawSortLetters();

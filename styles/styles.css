@@ -2,13 +2,26 @@ h1 {
     color: blue;
 }
 
+nav {
+    border: 2px solid red;
+}
+
+.sort-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+.sort-list li {
+    list-style-type: none;
+}
+
 html, body {
     height: 100%;
 }
 
 .email-list {
     border: 2px solid green;
-    width: 35%;
+    width: 40%;
     height: 100%;
     overflow: auto;
 }
