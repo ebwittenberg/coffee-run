@@ -1,6 +1,6 @@
 let coffeeUrl = 'https://dc-coffeerun.herokuapp.com/api/coffeeOrders'
 
-let emailsArray = [];
+// let emailsArray = [];
 
 function getEmail(url) {
     // returns a promise
@@ -9,13 +9,35 @@ function getEmail(url) {
         .then(function(response) {
             return response.json()
         })
-        // take that promise, console log the data
-        .then(function(emails) {
-            // store emails in email array
-            let allEmails = Object.keys(emails);
-            emailsArray.push(allEmails);
-
-        })
+        // take that promise, call accumulate emails
+        .then(accumulateEmails)
 }
 
-getEmail(coffeeUrl);
+// take the emails received from the API, and do something with them
+function accumulateEmails(emailData) {
+    console.log(emailData);
+    // store each email (which is each object's key) in emails
+    let emails = Object.keys(emailData);
+
+    storeEmails(emails);
+
+}
+
+
+function storeEmails(array) {
+    // turn array of emails into JSON text format
+    const jsonEmails = JSON.stringify(array);
+    console.log(`Saving ${array.length} emails`);
+    // save json formatted emails in localStorage
+    localStorage.setItem('emails', jsonEmails);
+
+}
+
+// getEmail(coffeeUrl);
+
+
+function main() {
+    getEmail(coffeeUrl);
+}
+
+main();
