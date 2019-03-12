@@ -1,7 +1,5 @@
 let coffeeUrl = 'https://dc-coffeerun.herokuapp.com/api/coffeeOrders'
 
-// let emailsArray = [];
-
 function getEmail(url) {
     // returns a promise
     fetch(url)
@@ -32,19 +30,35 @@ function storeEmails(array) {
 }
 
 function loadEmails() {
-    let emails = localStorage.getItem('emails');
+    let jsonEmails = localStorage.getItem('emails');
+    const emails = JSON.parse(jsonEmails);
+
     
     return emails;
 }
 
-// getEmail(coffeeUrl);
+function createEmail(address) {
+    // points to unordered list in HTML
+    const listUl = document.querySelector('[data-list]');
+    console.log(listUl);
+    // creates list element
+    let li = document.createElement('li');
+    li.textContent = address;
+    console.log(li);
+    listUl.append(li);
+
+
+}
 
 
 function main() {
     let emails = loadEmails();
     // if the emails are already stored in localStorage
     if (emails) {
-        console.log(emails);
+        // append the email list into its container on the page
+        emails.forEach(function(email) {
+            createEmail(email);
+        })
     }
     // otherwise get the emails from the API
     else {
