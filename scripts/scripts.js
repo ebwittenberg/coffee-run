@@ -1,5 +1,6 @@
 let coffeeUrl = 'https://dc-coffeerun.herokuapp.com/api/coffeeOrders'
 
+let emailsArray = [];
 
 function getEmail(url) {
     // returns a promise
@@ -11,6 +12,10 @@ function getEmail(url) {
         // take that promise, console log the data
         .then(function(emails) {
             // store emails in email array
-            console.log(emails);
+            let allEmails = Object.keys(emails);
+            emailsArray.push(allEmails);
+
         })
 }
+
+getEmail(coffeeUrl);
