@@ -19,6 +19,10 @@ html, body {
     height: 100%;
 }
 
+.details div {
+    margin: 20px;
+}
+
 .main-container {
     display: flex;
     height: 80%;

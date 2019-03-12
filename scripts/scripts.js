@@ -45,6 +45,7 @@ function drawEmail(object) {
     const listUl = document.querySelector('[data-list]');
     // creates list element
     let li = document.createElement('li');
+    // gives li text content of email address value in object
     li.textContent = object.emailAddress;
 
     li.addEventListener('click', function() {
@@ -56,7 +57,33 @@ function drawEmail(object) {
 }
 
 function drawDetails(object) {
-    console.log(object);
+    console.log(object.emailAddress);
+    let detailsDiv = document.querySelector('[data-details]');
+    detailsDiv.textContent = '';
+    console.log(detailsDiv);
+    const emailDiv = document.createElement('div');
+    const idDiv = document.createElement('div');
+    const coffeeDiv = document.createElement('div');
+    const sizeDiv = document.createElement('div');
+    const flavorDiv = document.createElement('div');
+    const strengthDiv = document.createElement('div');
+
+    emailDiv.textContent = `Email: ${object.emailAddress}`;
+    idDiv.textContent = `ID: ${object._id}`;
+    coffeeDiv.textContent = `Coffee: ${object.coffee}`;
+    sizeDiv.textContent = `Size: ${object.size}`;
+    flavorDiv.textContent = `Flavor: ${object.flavor}`;
+    strengthDiv.textContent = `Strength: ${object.strength}`;
+
+    detailsDiv.append(emailDiv);
+    detailsDiv.append(idDiv);
+    detailsDiv.append(coffeeDiv);
+    detailsDiv.append(sizeDiv);
+    detailsDiv.append(flavorDiv);
+    detailsDiv.append(strengthDiv);
+    
+
+
 }
 
 
