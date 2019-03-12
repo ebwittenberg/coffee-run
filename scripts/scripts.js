@@ -20,7 +20,6 @@ function accumulateEmails(emailData) {
     let emails = Object.keys(emailData);
 
     storeEmails(emails);
-
 }
 
 
@@ -30,14 +29,30 @@ function storeEmails(array) {
     console.log(`Saving ${array.length} emails`);
     // save json formatted emails in localStorage
     localStorage.setItem('emails', jsonEmails);
+}
 
+function loadEmails() {
+    let emails = localStorage.getItem('emails');
+    
+    return emails;
 }
 
 // getEmail(coffeeUrl);
 
 
 function main() {
-    getEmail(coffeeUrl);
+    let emails = loadEmails();
+    // if the emails are already stored in localStorage
+    if (emails) {
+        console.log(emails);
+    }
+    // otherwise get the emails from the API
+    else {
+        console.log('No emails in local storage yet')
+        getEmail(coffeeUrl);
+    }
+
+
 }
 
 main();
