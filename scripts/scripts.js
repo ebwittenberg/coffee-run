@@ -15,49 +15,59 @@ function getEmail(url) {
 function accumulateEmails(emailData) {
     console.log(emailData);
     // store each email (which is each object's key) in emails
-    let emails = Object.keys(emailData);
+    let coffeeData = emailData;
 
-    storeEmails(emails);
+    storeEmails(coffeeData);
 }
 
 
 function storeEmails(array) {
     // turn array of emails into JSON text format
-    const jsonEmails = JSON.stringify(array);
+    const jsonCoffeeData = JSON.stringify(array);
     console.log(`Saving ${array.length} emails`);
     // save json formatted emails in localStorage
-    localStorage.setItem('emails', jsonEmails);
+    localStorage.setItem('coffee-data', jsonCoffeeData);
+
+    main();
 }
 
-function loadEmails() {
-    let jsonEmails = localStorage.getItem('emails');
-    const emails = JSON.parse(jsonEmails);
+function loadCoffeeData() {
+    let jsonCoffeeData = localStorage.getItem('coffee-data');
+    const emails = JSON.parse(jsonCoffeeData);
 
     
     return emails;
 }
 
-function createEmail(address) {
+function drawEmail(object) {
+    // console.log(object);
     // points to unordered list in HTML
     const listUl = document.querySelector('[data-list]');
-    console.log(listUl);
     // creates list element
     let li = document.createElement('li');
-    li.textContent = address;
-    console.log(li);
+    li.textContent = object.emailAddress;
+
+    li.addEventListener('click', function() {
+        drawDetails(object);
+    });
     listUl.append(li);
 
 
 }
 
+function drawDetails(object) {
+    console.log(object);
+}
+
 
 function main() {
-    let emails = loadEmails();
-    // if the emails are already stored in localStorage
-    if (emails) {
+    let coffeeData = loadCoffeeData();
+    // if the coffee data is already stored in localStorage
+    if (coffeeData) {
+        const emails = Object.keys(coffeeData);
         // append the email list into its container on the page
         emails.forEach(function(email) {
-            createEmail(email);
+            drawEmail(coffeeData[email]);
         })
     }
     // otherwise get the emails from the API
