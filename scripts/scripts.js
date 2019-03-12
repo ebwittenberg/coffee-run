@@ -1,4 +1,4 @@
-let coffeeUrl = 'https://dc-coffeerun.herokuapp.com/api/coffeeOrders'
+let coffeeUrl = '../coffee.json';
 
 function getEmail(url) {
     // returns a promise
@@ -45,6 +45,7 @@ function drawEmail(object) {
     const listUl = document.querySelector('[data-list]');
     // creates list element
     let li = document.createElement('li');
+    li.setAttribute('class', 'email-li');
     // gives li text content of email address value in object
     li.textContent = object.emailAddress;
 
@@ -108,6 +109,8 @@ function main() {
 
 main();
 
+// sorting/filtering function below
+
 function drawSortLetters() {
     let sortUl = document.querySelector('[data-sort-list]');
     console.log(sortUl);
@@ -116,9 +119,23 @@ function drawSortLetters() {
     while (asciiValue < 91) {
         let li = document.createElement('li');
         li.textContent = String.fromCharCode(asciiValue);
+        li.addEventListener('click', function() {
+            filterEmails(li.textContent.toLowerCase());
+        })
         sortUl.append(li);
         asciiValue++;
     }
 
 }
 drawSortLetters();
+
+function filterEmails(sortLetter) {
+    let allEmails = document.querySelectorAll('.email-li');
+    allEmails.forEach(email => {
+        email.style.display = 'block';
+        let firstLetter = email.textContent[0];
+        if (firstLetter !== sortLetter) {
+            email.style.display = 'none';
+        }
+    })
+}
