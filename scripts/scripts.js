@@ -125,17 +125,29 @@ function drawSortLetters() {
         sortUl.append(li);
         asciiValue++;
     }
+    let showAllLi = document.createElement('li');
+    showAllLi.textContent = 'Show All';
+    sortUl.append(showAllLi);
+
+    showAllLi.addEventListener('click', unfilterEmails);
 
 }
 drawSortLetters();
 
+let allEmails = document.querySelectorAll('.email-li');
+
 function filterEmails(sortLetter) {
-    let allEmails = document.querySelectorAll('.email-li');
     allEmails.forEach(email => {
         email.style.display = 'block';
         let firstLetter = email.textContent[0];
         if (firstLetter !== sortLetter) {
             email.style.display = 'none';
         }
+    })
+}
+
+function unfilterEmails() {
+    allEmails.forEach(email => {
+        email.style.display = 'block';
     })
 }
